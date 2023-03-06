@@ -11,9 +11,10 @@ std::pair<RectF, RectF> Screen_SplitFixedRight(const RectF& raw, double px) {
 	);
 }
 void Main()
-{	
+{
+	//
 	Window::SetMinimumFrameBufferSize({ 1000, 500 });
-	Window::Resize(1368, 730);
+	Window::Resize(1023,535);
 	Screen_Resizer display1({ 4000,7500 });
 	Screen_Resizer display2({ 1800,1300 }, ScreenStyle::Keep);
 	//Screen_Resizer display2({ 1800,1300 }, ScreenStyle::Left);
@@ -34,7 +35,7 @@ void Main()
 	Print << WorkArea;
 	while (System::Update())
 	{
-		const auto [left, right] = Screen_SplitFixedRight(Scene::Rect(), 900);
+		const auto [left, right] = Screen_SplitFixedRight(Scene::Rect(), 700);
 		//left.draw(ColorF{ 0.0, 0.5, 1.0, 0.1 });
 		right.draw(Palette::Whitesmoke);
 		display1.Resize_Update(left);
@@ -49,11 +50,5 @@ void Main()
 		menu.MenuFrameDraw();
 		menu.MenuUIDraw();
 		field.draw(menu.slider_jadge());
-
-
-
-
-
-
 	}
 }

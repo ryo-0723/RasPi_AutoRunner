@@ -85,6 +85,8 @@ Resource(engine/texture/box-shadow/8.png)
 //
 //	Fonts
 //
+Resource(engine/font/DSEG7ModernMini-Bold.ttf)
+
 Resource(engine/font/mplus/mplus-1p-thin.ttf.zstdcmp)
 Resource(engine/font/mplus/mplus-1p-light.ttf.zstdcmp)
 Resource(engine/font/mplus/mplus-1p-regular.ttf.zstdcmp)

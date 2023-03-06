@@ -3,9 +3,8 @@
 #include <Siv3D.hpp>
 
 constexpr RectF box{ 60,240,90,25 };
-constexpr RoundRect TCP_box{960,40,110,45,10};
-constexpr RectF Wifi_box{ 60,120,120,80 };
-constexpr RoundRect Feildpick{ 50,20,300,80,2 };
+constexpr RoundRect Serial_box{1160,40,310,130,10};
+constexpr RoundRect Feildpick{ 50,20,320,100,2 };
 constexpr Circle SpeedMeter{300,1080,280};
 constexpr Circle MoveTimer{ 890,1080,280 };
 //constexpr Triangle Speedneedle{190,900,100 };

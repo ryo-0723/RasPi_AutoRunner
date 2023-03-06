@@ -1,9 +1,13 @@
 ﻿#pragma once
 
 #include "display_manager.h"
+#include "Robot.h"
+#include "FieldConstant.h"
+
 class Field {
 private:
 	Screen_Resizer& resizer;
+	Robot robot;
 	int offset_x = 290;
 	int offset_y = 250;
 
@@ -13,7 +17,9 @@ private:
 	RectF BlueField_Frame = { 0 + offset2_x,0 + offset2_y,3424,6924 };
 
 public:
-	Field(Screen_Resizer& resizer) :resizer(resizer) {}
+	Field(Screen_Resizer& resizer)
+		:resizer(resizer)
+	     ,robot(resizer,robot_shape,offset_x,offset_y){}
 
 	Vec2 RedField_Pos() {
 		
@@ -71,8 +77,8 @@ public:
 		resizer.toReal(RectF{ 2624 + offset_x,6424 + offset_y,800,500 }).drawFrame(resizer.Cal_Size(30), 0);
 	}
 	void FieldRedDraw() {
-		resizer.toReal(RectF{ 1212 + offset_x,5924 + offset_y,1000,1000 }).drawFrame(resizer.Cal_Size(30), 0, Palette::Red);
-		resizer.toReal(RectF{ 1212 + offset_x,6224 + offset_y,700,700 }).drawFrame(resizer.Cal_Size(30), 0, Palette::Red);
+		resizer.toReal(RectF{ 1250 + offset_x,5924 + offset_y,1000,1000 }).drawFrame(resizer.Cal_Size(30), 0, Palette::Red);
+		resizer.toReal(RectF{ 1250 + offset_x,6224 + offset_y,700,700 }).drawFrame(resizer.Cal_Size(30), 0, Palette::Red);
 	}
 
 	void BlueFieldWoodDraw() {
@@ -126,6 +132,7 @@ public:
 	/// @brief フィールドを描画する関数
 	/// @param r=0 赤フィールド　r=1　青フィールド
 	void draw(bool r) {
+		robot.Update(0,0,0);
 		if (r) {
 			BlueFieldWoodDraw();
 			BlueFieldLineDraw();
@@ -136,5 +143,6 @@ public:
 			FieldLineDraw();
 			FieldRedDraw();
 		}
+		robot.draw();
 	}
 };

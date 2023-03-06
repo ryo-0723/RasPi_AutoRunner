@@ -16,7 +16,7 @@ private:
 public:
 	Menu(Screen_Resizer& resizer)
 		:resizer(resizer)
-		, button(resizer, TCP_box, U"begin", U"end")
+		, button(resizer, Serial_box, U"begin", U"end")
 		, slider(resizer, Feildpick, Palette::Red, Palette::Blue)
 		, Speedmeter(resizer, SpeedMeter, U"m/s", { 0,30 })
 		, Movetimer(resizer, MoveTimer, U"/s", { 0,10 }) {}
@@ -24,9 +24,6 @@ public:
 	const Font RobotPos{ 45 };
 	const Font Machine_Font{ 25 };
 	const Texture Signal_max{ 0xf08fa_icon ,100 };
-	const Texture Signal_good{ 0xf08f8_icon ,100 };
-	const Texture Signal_fair{ 0xf08f6_icon ,100 };
-	const Texture Signal_week{ 0xf08f4_icon ,100 };
 	const Texture Signal_slash{ 0xf08fc_icon ,100 };
 	bool status[5] = { false,true,false,true,true };
 
@@ -47,38 +44,23 @@ public:
 		slider.draw();
 		button.draw();
 		mechanism_state(4000, 45, status);
-		TCP_status(0);
+		TCP_status(1);
 	}
 	bool slider_jadge() {
 		return slider.Slider_jadge();
 	}
 
-	void TCP_status(int status) {
-		switch (status) {
+	void TCP_status(int s) {
+		switch (s) {
 		case 0:
 			Signal_slash
-				.resized(resizer.Cal_Size(30))
-				.draw(resizer.Cal_Pos({ 900, 50 }), Palette::Black);
+				.resized(resizer.Cal_Size(230))
+				.draw(resizer.Cal_Pos({ 1530, 20 }), Palette::Black);
 			break;
 		case 1:
-			Signal_week
-				.resized(resizer.Cal_Size(30))
-				.draw(resizer.Cal_Pos({ 900, 50 }), Palette::Black);
-			break;
-		case 2:
-			Signal_fair
-				.resized(resizer.Cal_Size(30))
-				.draw(resizer.Cal_Pos({ 900, 50 }), Palette::Black);
-			break;
-		case 3:
-			Signal_good
-				.resized(resizer.Cal_Size(30))
-				.draw(resizer.Cal_Pos({ 900, 50 }), Palette::Black);
-			break;
-		case 4:
 			Signal_max
-				.resized(resizer.Cal_Size(30))
-				.draw(resizer.Cal_Pos({ 900, 50 }), Palette::Black);
+				.resized(resizer.Cal_Size(230))
+				.draw(resizer.Cal_Pos({ 1530, 20 }), Palette::Black);
 			break;
 		}
 
