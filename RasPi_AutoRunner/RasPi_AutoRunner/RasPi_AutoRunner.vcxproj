@@ -322,7 +322,10 @@
     <ClInclude Include="Menu.h" />
     <ClInclude Include="MenuConstant.h" />
     <ClInclude Include="Meter.h" />
+    <ClInclude Include="New_RunControll.h" />
     <ClInclude Include="Robot.h" />
+    <ClInclude Include="Route.h" />
+    <ClInclude Include="RouteConstant.h" />
     <ClInclude Include="ScreenStyle.h" />
     <ClInclude Include="Slider.h" />
     <ClInclude Include="stdafx.h" />

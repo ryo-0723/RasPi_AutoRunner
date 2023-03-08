@@ -6,7 +6,7 @@ class Meter {
 private:
 	Screen_Resizer& resizer;
 	Circle  MeterCircle;
-	const Font Value_Font{ 90,Resource(U"engine/font/DSEG7ModernMini-Bold.ttf") };
+	const Font Value_Font{ 70,Resource(U"engine/font/DSEG7ModernMini-Bold.ttf") };
 	const Font Unit_Font{ 50,Typeface::CJK_Regular_JP };
 	Triangle Needle;
 	String Unit_string;
@@ -40,7 +40,7 @@ public:
 			.draw(Needle_Color);
 		Unit_Font(Unit_string)
 			.drawBaseAt(resizer.Cal_Pos({ MeterCircle.center.x, MeterCircle.center.y + MeterCircle.r * 0.7 }), Unit_FontColor);
-		Value_Font(Value)
+		Value_Font(U"{:.2f}"_fmt(Value))
 			.drawAt(resizer.Cal_Pos({ MeterCircle.center.x, MeterCircle.center.y + MeterCircle.r * -0.15 }), Value_FontColor);
 		}
 

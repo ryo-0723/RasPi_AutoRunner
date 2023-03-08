@@ -21,15 +21,6 @@ public:
 		:resizer(resizer)
 	     ,robot(resizer,robot_shape,offset_x,offset_y){}
 
-	Vec2 RedField_Pos() {
-		
-	}
-
-	Vec2 BlueField_Pos() {
-
-	}
-
-
 	void FieldWoodDraw() {
 		//Print << resizer.toReal(RectF{ 0,0,1000,1000 }).draw();
 		//赤ゾーンフィールド
@@ -77,8 +68,8 @@ public:
 		resizer.toReal(RectF{ 2624 + offset_x,6424 + offset_y,800,500 }).drawFrame(resizer.Cal_Size(30), 0);
 	}
 	void FieldRedDraw() {
-		resizer.toReal(RectF{ 1250 + offset_x,5924 + offset_y,1000,1000 }).drawFrame(resizer.Cal_Size(30), 0, Palette::Red);
-		resizer.toReal(RectF{ 1250 + offset_x,6224 + offset_y,700,700 }).drawFrame(resizer.Cal_Size(30), 0, Palette::Red);
+		resizer.toReal(RectF{ 1212 + offset_x,5924 + offset_y,1000,1000 }).drawFrame(resizer.Cal_Size(30), 0, Palette::Red);
+		resizer.toReal(RectF{ 1212 + offset_x,6224 + offset_y,700,700 }).drawFrame(resizer.Cal_Size(30), 0, Palette::Red);
 	}
 
 	void BlueFieldWoodDraw() {
@@ -131,8 +122,8 @@ public:
 	}
 	/// @brief フィールドを描画する関数
 	/// @param r=0 赤フィールド　r=1　青フィールド
-	void draw(bool r) {
-		robot.Update(0,0,0);
+	void draw(bool r,long x,long y,float turn) {
+		robot.Update(x,y,turn,r);
 		if (r) {
 			BlueFieldWoodDraw();
 			BlueFieldLineDraw();
@@ -144,5 +135,8 @@ public:
 			FieldRedDraw();
 		}
 		robot.draw();
+	}
+	double robot_speed() {
+		return robot.robot_speed();
 	}
 };

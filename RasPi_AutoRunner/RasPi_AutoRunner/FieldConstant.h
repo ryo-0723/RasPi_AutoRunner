@@ -2,4 +2,4 @@
 
 #include <Siv3D.hpp>
 
-constexpr RectF robot_shape {0,0,600,600};
+constexpr RectF robot_shape {0,0,650,650};
