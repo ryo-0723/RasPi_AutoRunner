@@ -29,7 +29,7 @@ public:
 	/// @brief スライダーの描画関数
 	void  draw() {//スライダーっぽいスイッチ
 		//ボタンの外枠
-		resizer.toReal(Frame_rect).drawFrame(resizer.Cal_Size(1), 0, Palette::Purple);
+		resizer.toReal(Frame_rect).drawFrame(resizer.Cal_Size(2), 0, Palette::Purple);
 		if (not slider)
 			resizer.toReal(_rect)
 			.draw(Left_color);

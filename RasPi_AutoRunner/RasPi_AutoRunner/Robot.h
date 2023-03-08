@@ -41,7 +41,7 @@ public:
 	}
 	void draw() {
 		resizer.toReal(Robot_shape).setCenter(resizer.Cal_Pos({ Robot_Pos.x,Robot_Pos.y })).rotated(Robot_Pos.z)
-			.drawFrame(resizer.Cal_Size(10), 0, Palette::Black);
+			.drawFrame(resizer.Cal_Size(35), 0, Palette::Black);
 		RectF{ 0,0
 			,resizer.Cal_Size(Robot_shape.w * 0.5)
 			,resizer.Cal_Size(Robot_shape.h * 0.5) }
