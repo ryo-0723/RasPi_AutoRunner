@@ -22,7 +22,7 @@ private:
 	double end_s = 0;
 	float time = 0;
 	bool auto_end_flag = false;
-	SendData Data;
+	SendData data;
 
 	bool  set_catapult_charge = false;
 	bool  set_catapult_shoot = false;
@@ -152,19 +152,23 @@ public:
 	}
 
 	SendData SetData() {
-		return Data;
+		return data;
 	}
 	void setdata() {
-		Data.x_axis = (long)Next_Pos().x;
-		Data.y_axis = (long)Next_Pos().y;
-		Data.turn = (long)Next_Pos().z;
-		Data.rpm = set_bottle_rpm;
-		Data.roller_angle = set_bottle_angle;
-		Data.catapult_shoot =  set_catapult_shoot;
-		Data.catapult_charge = set_catapult_charge;
-		Data.roller_shoot = set_bottle_shoot;
-		Data.roller_collect = set_bottle_collect;
-		Data.auto_end_flag = auto_end_flag;
+		data.x_axis = (long)Next_Pos().x;
+		data.y_axis = (long)Next_Pos().y;
+		data.turn = (long)Next_Pos().z;
+		data.rpm = set_bottle_rpm;
+		data.roller_angle = set_bottle_angle;
+		data.catapult_shoot =  set_catapult_shoot;
+		data.catapult_charge = set_catapult_charge;
+		data.roller_shoot = set_bottle_shoot;
+		data.roller_collect = set_bottle_collect;
+		data.auto_end_flag = auto_end_flag;
 		//自動の終了後に送るフラグ
+		Print << data.auto_end_flag;
+		Print << data.x_axis;
+		Print << data.y_axis;
+		Print << data.catapult_charge;
 	}
 };

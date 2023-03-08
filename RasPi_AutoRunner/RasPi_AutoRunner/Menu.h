@@ -27,7 +27,6 @@ public:
 	const Font Serialport{25};
 	const Texture Signal_max{ 0xf08fa_icon ,100 };
 	const Texture Signal_slash{ 0xf08fc_icon ,100 };
-	bool status[5] = { false,true,false,true,true };
 
 	void MenuFrameDraw() {
 		resizer.toReal(Line{ 0,0,0,500 }).draw();
@@ -41,7 +40,7 @@ public:
 		Routebutton.Update();
 	}
 	void MenuUIDraw(const ReadData& Data,bool open,int portspeed,double robot_speed,double move_time) {
-		bool status[4] = { Data.roller_shoot,Data.roller_collect,Data.catapult_shoot,Data.catapult_charge };
+		bool status[5] = { Data.roller_shoot,Data.roller_collect,Data.catapult_shoot,Data.catapult_charge ,Data.auto_flag};
 		Speedmeter.draw(robot_speed);
 		Movetimer.draw(move_time);
 		robotposition_show(Data.x_axis, Data.y_axis, Data.turn);
@@ -91,22 +90,24 @@ public:
 	void mechanism_state(float rpm, int angle, bool status[]) {
 		resizer.toReal(mechanism_state_frame).drawFrame(resizer.Cal_Size(1), resizer.Cal_Size(0), Palette::Black);
 		Machine_Font(U"BottleRoller")
-			.draw(resizer.Cal_Pos({ mechanism_state_frame.x + Machine_Font.spaceWidth() * 2,mechanism_state_frame.y}), Palette::Black);
+			.draw(resizer.Cal_Pos({ mechanism_state_frame.x + Machine_Font.spaceWidth() * 2,mechanism_state_frame.y }), Palette::Black);
 		Machine_Font(U"Rorarion speed : ", rpm, U"m/s")
-			.draw(resizer.Cal_Pos({ mechanism_state_frame.x + Machine_Font.spaceWidth() * 18,mechanism_state_frame.y + Machine_Font.height()*2.5 }), Palette::Black);
+			.draw(resizer.Cal_Pos({ mechanism_state_frame.x + Machine_Font.spaceWidth() * 18,mechanism_state_frame.y + Machine_Font.height() * 2.5 }), Palette::Black);
 		Machine_Font(U"direction　: ", angle, U"°")
 			.draw(resizer.Cal_Pos({ mechanism_state_frame.x + Machine_Font.spaceWidth() * 18,mechanism_state_frame.y + Machine_Font.height() * 4.5 }), Palette::Black);
-		Machine_Font(U"shoot status  : ", status[0]? U"OK": U"NOT")
+		Machine_Font(U"shoot status  : ", status[0] ? U"OK" : U"NOT")
 			.draw(resizer.Cal_Pos({ mechanism_state_frame.x + Machine_Font.spaceWidth() * 18,mechanism_state_frame.y + Machine_Font.height() * 6.5 }), Palette::Black);
 		Machine_Font(U"collect_status  : ", status[1] ? U"catch" : U"rerease")
 			.draw(resizer.Cal_Pos({ mechanism_state_frame.x + Machine_Font.spaceWidth() * 18,mechanism_state_frame.y + Machine_Font.height() * 8.5 }), Palette::Black);
 
 		Machine_Font(U"Catapult")
 			.draw(resizer.Cal_Pos({ mechanism_state_frame.x + Machine_Font.spaceWidth() * 2 ,mechanism_state_frame.y + Machine_Font.height() * 11 }), Palette::Black);
-		Machine_Font(U"shoot status  : ", status[2]?U"Complete":U"NOT")
+		Machine_Font(U"shoot status  : ", status[2] ? U"Complete" : U"NOT")
 			.draw(resizer.Cal_Pos({ mechanism_state_frame.x + Machine_Font.spaceWidth() * 18,mechanism_state_frame.y + Machine_Font.height() * 13 }), Palette::Black);
-		Machine_Font(U"charge status : ", status[3]?U"NOT":U"Prepare")
-			.draw(resizer.Cal_Pos({ mechanism_state_frame.x + Machine_Font.spaceWidth() * 18,mechanism_state_frame.y + Machine_Font.height() * 15}), Palette::Black);
-}
+		Machine_Font(U"charge status : ", status[3] ? U"NOT" : U"Prepare")
+			.draw(resizer.Cal_Pos({ mechanism_state_frame.x + Machine_Font.spaceWidth() * 18,mechanism_state_frame.y + Machine_Font.height() * 15 }), Palette::Black);
+		Machine_Font(U"Auto_flag : ", status[4] ? U"NOT" : U"play")
+			.draw(resizer.Cal_Pos({ mechanism_state_frame.x + Machine_Font.spaceWidth() * 18,mechanism_state_frame.y + Machine_Font.height() * 17 }), Palette::Black);
+	}
 
 };
