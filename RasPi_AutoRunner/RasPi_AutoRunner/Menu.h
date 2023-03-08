@@ -106,7 +106,7 @@ public:
 			.draw(resizer.Cal_Pos({ mechanism_state_frame.x + Machine_Font.spaceWidth() * 18,mechanism_state_frame.y + Machine_Font.height() * 13 }), Palette::Black);
 		Machine_Font(U"charge status : ", status[3] ? U"NOT" : U"Prepare")
 			.draw(resizer.Cal_Pos({ mechanism_state_frame.x + Machine_Font.spaceWidth() * 18,mechanism_state_frame.y + Machine_Font.height() * 15 }), Palette::Black);
-		Machine_Font(U"Auto_flag : ", status[4] ? U"NOT" : U"play")
+		Machine_Font(U"Auto_flag : ", status[4] ? U"play" : U"NOT")
 			.draw(resizer.Cal_Pos({ mechanism_state_frame.x + Machine_Font.spaceWidth() * 18,mechanism_state_frame.y + Machine_Font.height() * 17 }), Palette::Black);
 	}
 

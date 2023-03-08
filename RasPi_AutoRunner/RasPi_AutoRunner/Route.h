@@ -32,7 +32,7 @@ private:
 	float  set_bottle_rpm = 0;
 public:
 	Route()
-		:auto_move(5.0, 0.5)
+		:auto_move(10.0, 2.0)
 		, next_Pos()
 		, next_line() {}
 
@@ -166,6 +166,7 @@ public:
 		data.roller_collect = set_bottle_collect;
 		data.auto_end_flag = auto_end_flag;
 		//自動の終了後に送るフラグ
+		Print << route_case;
 		Print << data.auto_end_flag;
 		Print << data.x_axis;
 		Print << data.y_axis;
