@@ -57,6 +57,9 @@ public:
 	bool button_jadge() {
 		return button.Rect_judge();
 	}
+	bool routebutton() {
+		return Routebutton.Rect_click();
+	}
 	void Serial_status(bool s,int speed) {
 		switch (s) {
 		case 0:

@@ -2,17 +2,20 @@
 
 #include <Siv3D.hpp>
 
-class New_RunControll {
+class New_RunControll
+{
 private:
 	double end_s = 0, start_s = 0, max_s = 0, limit_s = 0;
 	double up_t = 0, down_t = 0, max_power_t = 0, all_t = 0;
 	double L1 = 0, L3 = 0;
 	double kakudo = 0;
 	double acc_, acc;
-	double target = 0, end_potion = 0;
+	double target = 0;
 	unsigned long times = 0;
 	bool Stop_flag = false, Reset_flag = false, Timer_state = false;
-	bool cal_state = false, next_state = true;
+	bool  next_state = true;
+	double distance = 0;
+	LineString oldline{ {0,0},{0,0} };
 public:
 	New_RunControll(double acc, double max_s)
 	:acc(acc)
@@ -60,10 +63,24 @@ public:
 		return millis() - times;// ms
 	}
 
+	/// @brief 台形制御のための時間計算
+	/// @param line 台形制御する直線の構造体
+	/// @param start_s 初めの速度
+	/// @param end_s 終わりの速度
+	void calculation(LineString &line,double start_s,double end_s) {
+			//前回の線の終わりと今回の線の初めの位置が同じとき
+			//時間の計測を行う
+		if (oldline.back()==line.front()) {
+			//線がつながっているからタイマースタート
+			timer_reset();
+			timer_start();
+		}
+		else {
+			timer_stop();
+		}
 
-	void calculation(LineString line,double start_s,double end_s) {
-		if (cal_state) return;
-		double distance = line.calculateLength();
+		 distance = line.calculateLength()/1000.00;
+		//mに変換する
 		up_t = (max_s - start_s) * acc_; //最高速度までの加速にかかる時間 /s
 		down_t = (max_s - end_s) * acc_; //減速にかかる時間 /s
 		L1 = start_s * up_t + acc * sq(up_t) * 0.5; //加速時における移動距離 /m
@@ -81,14 +98,8 @@ public:
 			all_t = up_t + down_t + max_power_t; //移動にかかる合計時間 / s
 			limit_s = max_s;
 		}
-		cal_state = true;
-	}
-	void tar_point() {
-		//  X=Vot+(1/2)*at^2;
-		if (cal_state) {
-			timer_start();//タイマーを開始する←何度呼び出しても一度だけ実行される
-		}
-		double t = read_ms() * 0.001;
+
+		double t = read_ms() * 0.001;//sにする
 		double ut = constrain(t, 0.00, up_t);
 		double dt = constrain(t - (up_t + max_power_t), 0.00, down_t);
 		double target_ = acc * sq(ut) * 0.50 + start_s * ut
@@ -96,27 +107,26 @@ public:
 			+ (-acc * sq(dt) * 0.50) + limit_s * dt;
 		//座標の更新をするところ
 		//毎周期ごとに積算せずに最初から計算
-		target = target_ + end_potion;
 
+		target = target_ * 1000;
+		//mで返ってくるためmmに変換する
 		if (all_t <= t) {
-			end_potion = target;
 			timer_stop();
-			timer_reset();
-			cal_state = false;
 			next_state = true;
+			oldline = line;
+		}
+		else {
+			next_state = false;
 		}
 	}
 	bool next_status() {//今回の経路を巡行し終えたらtrueになる
 		return next_state;
 	}
-	void set_next_status() {//次の経路をセットしたら必ず行う
-		next_state = false;
-	}
-	double end_dis() {
-		return end_potion;
-	}
 	double tar_dis() {
 		return target;
+	}
+	double move_time() {
+		return read_ms();
 	}
 	double all_time() {
 		return all_t;

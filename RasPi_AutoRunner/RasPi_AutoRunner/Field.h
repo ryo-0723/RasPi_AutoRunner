@@ -8,6 +8,7 @@ class Field {
 private:
 	Screen_Resizer& resizer;
 	Robot robot;
+	Robot next_robot;
 	int offset_x = 290;
 	int offset_y = 250;
 
@@ -19,7 +20,8 @@ private:
 public:
 	Field(Screen_Resizer& resizer)
 		:resizer(resizer)
-	     ,robot(resizer,robot_shape,offset_x,offset_y){}
+	     ,robot(resizer,robot_shape,offset_x,offset_y)
+		, next_robot(resizer, robot_shape, offset_x, offset_y) {}
 
 	void FieldWoodDraw() {
 		//Print << resizer.toReal(RectF{ 0,0,1000,1000 }).draw();
@@ -122,8 +124,9 @@ public:
 	}
 	/// @brief フィールドを描画する関数
 	/// @param r=0 赤フィールド　r=1　青フィールド
-	void draw(bool r,long x,long y,float turn) {
+	void draw(bool r,long x,long y,float turn,Vec3 pos) {
 		robot.Update(x,y,turn,r);
+		next_robot.Update(pos.x,pos.y,pos.z,r);
 		if (r) {
 			BlueFieldWoodDraw();
 			BlueFieldLineDraw();
@@ -135,6 +138,7 @@ public:
 			FieldRedDraw();
 		}
 		robot.draw();
+		next_robot.draw();
 	}
 	double robot_speed() {
 		return robot.robot_speed();

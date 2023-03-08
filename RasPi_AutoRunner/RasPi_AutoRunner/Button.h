@@ -38,9 +38,14 @@ public:
 		font(string).drawAt(resizer.toReal(Frame_rect).center(), Palette::Black);
 	}
 	/// @brief ボタンの判定を返す関数
-	/// @return 0=クリックされていない　1=クリックされている
+	/// @return 0=おされていない　1=おされている
 	bool Rect_judge() {
 		return Click;
+	}
+	/// @brief クリックの反応のもの
+	/// @return 一度だけ切り替える
+	bool Rect_click() {
+		return returnClick;
 	}
 	void Set_string(String s) {
 		string = s;

@@ -821,5 +821,11 @@
     <ClInclude Include="RouteConstant.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="New_RunControll_turn.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="TurnController.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

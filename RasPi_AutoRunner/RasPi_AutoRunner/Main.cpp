@@ -71,11 +71,11 @@ void Main()
 
 		display1.toReal(RectF{ 0,0, 4000, 7500 }).draw(ColorF{ 0, 1.0, 0, 0.5 });
 		//display2.toReal(RectF{ 0,0, 700, 1000 }).draw(ColorF{ 0.0, 0.5, 1.0, 0.5 });
-		route.update(readData.auto_flag);
+		route.update(readData.auto_flag, menu.slider_jadge(),menu.routebutton());
 		menu.Update();
 		menu.MenuFrameDraw();
 		menu.MenuUIDraw(readData, isOpen,serialspeed, readData.robot_speed,Time::GetMillisec()/1000.00);
-		field.draw(menu.slider_jadge(),readData.x_axis,readData.y_axis,readData.turn);
+		field.draw(menu.slider_jadge(),readData.x_axis,readData.y_axis,readData.turn, route.Next_Pos());
 		//////////////////////////////データのセット
 		sendData=route.SetData();
 		/////////////////////////////////
