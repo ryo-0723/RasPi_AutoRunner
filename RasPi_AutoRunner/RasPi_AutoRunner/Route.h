@@ -64,6 +64,9 @@ public:
 			//自動が実行されていないとき
 			//自動の経路をリセットする
 			route_case = 0;
+			auto_move.reset();
+			//auto_move_turn.reset();
+
 		}
 		data.x_axis = (int32_t)Next_Pos().x;
 		data.y_axis = (int32_t)Next_Pos().y;

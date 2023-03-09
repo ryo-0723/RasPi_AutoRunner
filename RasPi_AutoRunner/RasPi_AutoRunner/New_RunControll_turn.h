@@ -132,6 +132,10 @@ public:
 			next_state = false;
 		}
 	}
+
+	void reset() {
+		old_turn = 0;
+	}
 	/// @brief 目標角度を返す
 	/// @return 目標角度
 	double tar_turn() {

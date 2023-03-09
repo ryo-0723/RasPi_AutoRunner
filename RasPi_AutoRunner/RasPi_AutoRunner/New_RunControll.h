@@ -119,6 +119,10 @@ public:
 			next_state = false;
 		}
 	}
+
+	void reset() {
+		oldline = LineString{ {0,0},{0,0} };
+	}
 	bool next_status() {//今回の経路を巡行し終えたらtrueになる
 		return next_state;
 	}
