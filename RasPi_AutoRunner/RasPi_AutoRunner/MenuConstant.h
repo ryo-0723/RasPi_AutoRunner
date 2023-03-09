@@ -35,11 +35,11 @@ struct SendData {
 	int32_t x_axis = 0, y_axis = 0;
 	float turn = 0, rpm = 0;
 	int16_t roller_angle = 0;
-	bool catapult_shoot : 1;
-	bool catapult_charge : 1;
-	bool roller_shoot : 1;
-	bool roller_collect : 1;
-	bool auto_end_flag : 1;
+	uint8_t catapult_shoot : 1;
+	uint8_t catapult_charge : 1;
+	uint8_t roller_shoot : 1;
+	uint8_t roller_collect : 1;
+	uint8_t auto_end_flag : 1;
 }_;// _attribute__((__packed__));
 #pragma pack(pop)
 //visual studioでのみのもの

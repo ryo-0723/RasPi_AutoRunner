@@ -55,13 +55,6 @@ void Main()
 			memcpy(&readData,readbinary, r_datasize);
 		}
 		//////////////////////////
-		/////////////////////送信
-		constexpr uint8 s_datasize = sizeof(sendData);
-		uint8 sendbinary[s_datasize];
-		memcpy(sendbinary, &sendData, s_datasize);
-		for (int i = 0; i < s_datasize;i++)
-			serial.writeByte(sendbinary[i]);
-		///////////////////////////
 
 		const auto [left, right] = Screen_SplitFixedRight(Scene::Rect(), 700);
 		//left.draw(ColorF{ 0.0, 0.5, 1.0, 0.1 });
@@ -79,6 +72,12 @@ void Main()
 		//////////////////////////////データのセット
 		sendData=route.SetData();
 		/////////////////////////////////
+				/////////////////////送信
+		constexpr uint8 s_datasize = sizeof(sendData);
+		uint8 sendbinary[s_datasize];
+		memcpy(sendbinary, &sendData, s_datasize);
+			serial.write(sendbinary,sizeof(sendbinary));
+		///////////////////////////
 
 	}
 }

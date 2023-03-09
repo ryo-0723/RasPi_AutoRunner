@@ -41,9 +41,10 @@ public:
 		, next_line(){}
 
 	void update(bool auto_start_flag,bool field_pick,bool change_button) {
-		if (Time::GetMillisec()>3000) {
+	/*	if (Time::GetMillisec()>3000) {
 			auto_start_flag = true;
 		}
+		*/
 		if (change_button) {
 			buttondata = !buttondata;
 		}
@@ -64,6 +65,16 @@ public:
 			//自動の経路をリセットする
 			route_case = 0;
 		}
+		data.x_axis = (int32_t)Next_Pos().x;
+		data.y_axis = (int32_t)Next_Pos().y;
+		data.turn = (float)Next_Pos().z;
+		data.rpm = (float)set_bottle_rpm;
+		data.roller_angle = (int)set_bottle_angle;
+		data.catapult_shoot = (bool)set_catapult_shoot;
+		data.catapult_charge = (bool)set_catapult_charge;
+		data.roller_shoot = (bool)set_bottle_shoot;
+		data.roller_collect = (bool)set_bottle_collect;
+		data.auto_end_flag = (bool)auto_end_flag;
 		setdata();
 	}
 
@@ -74,21 +85,12 @@ public:
 		return data;
 	}
 	void setdata() {
-		data.x_axis = (long)Next_Pos().x;
-		data.y_axis = (long)Next_Pos().y;
-		data.turn = (long)Next_Pos().z;
-		data.rpm = set_bottle_rpm;
-		data.roller_angle = set_bottle_angle;
-		data.catapult_shoot =  set_catapult_shoot;
-		data.catapult_charge = set_catapult_charge;
-		data.roller_shoot = set_bottle_shoot;
-		data.roller_collect = set_bottle_collect;
-		data.auto_end_flag = auto_end_flag;
 		//自動の終了後に送るフラグ
-		
+		/*
 		Print << auto_move_turn.tar_turn();
 		Print << auto_move.all_time();
 		Print << auto_move.read_ms();
+		*/
 		//Print << auto_move_turn.acc();
 		//Print << auto_move_turn.distance();
 		//Print << auto_move_turn.up();
@@ -96,7 +98,7 @@ public:
 		//Print << auto_move_turn.speed();
 		//Print << auto_move_turn();
 		
-		/*
+		
 		Print << data.auto_end_flag;
 		Print << data.catapult_charge;
 		Print << data.catapult_shoot;
@@ -107,7 +109,7 @@ public:
 		Print << data.turn;
 		Print << data.x_axis;
 		Print << data.y_axis;
-		*/
+		
 	}
 
 
@@ -244,6 +246,7 @@ public:
 			//自動モードを切るために終了フラグを送る
 		case 11:
 			//情報リセットのためのケース
+			set_bottle_rpm = 0;
 			auto_end_flag = true;
 			set_bottle_shoot = false;
 			set_catapult_shoot = false;
