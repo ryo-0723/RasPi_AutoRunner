@@ -85,13 +85,29 @@ public:
 		data.roller_collect = set_bottle_collect;
 		data.auto_end_flag = auto_end_flag;
 		//自動の終了後に送るフラグ
+		
 		Print << auto_move_turn.tar_turn();
 		Print << auto_move.all_time();
 		Print << auto_move.read_ms();
-		Print << auto_move_turn.acc();
-		Print << auto_move_turn.distance();
-		Print << auto_move_turn.up();
-		Print << auto_move_turn.down();
+		//Print << auto_move_turn.acc();
+		//Print << auto_move_turn.distance();
+		//Print << auto_move_turn.up();
+		//Print << auto_move_turn.down();
+		//Print << auto_move_turn.speed();
+		//Print << auto_move_turn();
+		
+		/*
+		Print << data.auto_end_flag;
+		Print << data.catapult_charge;
+		Print << data.catapult_shoot;
+		Print << data.roller_angle;
+		Print << data.roller_collect;
+		Print << data.roller_shoot;
+		Print << data.rpm;
+		Print << data.turn;
+		Print << data.x_axis;
+		Print << data.y_axis;
+		*/
 	}
 
 
@@ -109,7 +125,7 @@ public:
 			end_s = 0.8;
 			next_line = redshootRoute1;
 			auto_move.calculation(next_line, start_s, end_s);
-			auto_move_turn.calculation(135,auto_move.all_time(),auto_move.read_ms());
+			auto_move_turn.calculation(-45,auto_move.all_time(),auto_move.read_ms());
 			if (auto_move.next_status())//今のケースの経路をしておわったら次のフラグへ
 				route_case++;
 			break;
@@ -119,7 +135,7 @@ public:
 			end_s = 0;
 			next_line = redshootRoute2;
 			auto_move.calculation(next_line, start_s, end_s);
-			auto_move_turn.calculation(135, auto_move.all_time(), auto_move.read_ms());
+			auto_move_turn.calculation(-45, auto_move.all_time(), auto_move.read_ms());
 			move_time = Time::GetMillisec();
 			if (auto_move.next_status())//今のケースの経路をしておわったら次のフラグへ
 				route_case++;
@@ -172,7 +188,7 @@ public:
 			end_s = 0;
 			next_line = redshootRoute4;
 			auto_move.calculation(next_line, start_s, end_s);
-			auto_move_turn.calculation(135, auto_move.all_time(), auto_move.read_ms());
+			auto_move_turn.calculation(-45, auto_move.all_time(), auto_move.read_ms());
 			if (auto_move.next_status())//今のケースの経路をしておわったら次のフラグへ
 				route_case++;
 			break;
@@ -182,7 +198,7 @@ public:
 			end_s = 0;
 			next_line = redshootRoute5;
 			auto_move.calculation(next_line, start_s, end_s);
-			auto_move_turn.calculation(135, auto_move.all_time(), auto_move.read_ms());
+			auto_move_turn.calculation(-45, auto_move.all_time(), auto_move.read_ms());
 			move_time = Time::GetMillisec();
 			if (auto_move.next_status())//今のケースの経路をしておわったら次のフラグへ
 				route_case++;
