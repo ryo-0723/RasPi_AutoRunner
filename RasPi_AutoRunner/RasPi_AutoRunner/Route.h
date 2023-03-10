@@ -41,9 +41,11 @@ public:
 		, next_line(){}
 
 	void update(bool auto_start_flag,bool field_pick,bool change_button) {
+		/*
 		if (Time::GetMillisec()>3000) {
 			auto_start_flag = true;
 		}
+		*/
 	
 		if (change_button) {
 			buttondata = !buttondata;
