@@ -30,21 +30,21 @@ private:
 	bool  set_catapult_shoot = false;
 	bool  set_bottle_collect = false;
 	bool  set_bottle_shoot = false;
-	int  set_bottle_angle = 50;
+	int  set_bottle_angle = 42;
 	float  set_bottle_rpm = 0;
 	bool buttondata = false;
 public:
 	Route()
-		:auto_move(1.0, 0.5)
+		:auto_move(0.75, 1.9)
 		, auto_move_turn()
 		, next_Pos()
 		, next_line(){}
 
 	void update(bool auto_start_flag,bool field_pick,bool change_button) {
-	/*	if (Time::GetMillisec()>3000) {
+		if (Time::GetMillisec()>3000) {
 			auto_start_flag = true;
 		}
-		*/
+	
 		if (change_button) {
 			buttondata = !buttondata;
 		}
@@ -159,13 +159,13 @@ public:
 		case 4:
 			//物をつかんで発射位置まで移動する
 			//発射についての設定は走っている途中にする
-			set_bottle_rpm = 8;
-			set_bottle_angle = 55;
+			set_bottle_rpm = 7.4;
+			set_bottle_angle = 42;
 			start_s = 0;
 			end_s = 0;
 			next_line = redshootRoute3;
 			auto_move.calculation(next_line, start_s, end_s);
-			auto_move_turn.calculation(45, auto_move.all_time(), auto_move.read_ms());
+			auto_move_turn.calculation(10, auto_move.all_time(), auto_move.read_ms());
 			move_time = Time::GetMillisec();
 			if (auto_move.next_status())//今のケースの経路をしておわったら次のフラグへ
 				route_case++;
@@ -190,7 +190,7 @@ public:
 			//一度発射が終わったらリセットする
 			//次の回収物の横までくる
 			start_s = 0;
-			end_s = 0;
+			end_s = 0.2;
 			next_line = redshootRoute4;
 			auto_move.calculation(next_line, start_s, end_s);
 			auto_move_turn.calculation(-45, auto_move.all_time(), auto_move.read_ms());
@@ -199,7 +199,7 @@ public:
 			break;
 		case 7:
 			//回収物をつかむ場所まで移動する
-			start_s = 0;
+			start_s = 0.2;
 			end_s = 0;
 			next_line = redshootRoute5;
 			auto_move.calculation(next_line, start_s, end_s);
@@ -222,13 +222,13 @@ public:
 		case 9:
 			//回収物をつかんで発射位置まで移動する
 			//発射についての設定は走っている途中にする
-			set_bottle_rpm = 8;
-			set_bottle_angle = 55;
+			set_bottle_rpm = 7.4;
+			set_bottle_angle = 42;
 			start_s = 0;
 			end_s = 0;
 			next_line = redshootRoute6;
 			auto_move.calculation(next_line, start_s, end_s);
-			auto_move_turn.calculation(45, auto_move.all_time(), auto_move.read_ms());
+			auto_move_turn.calculation(55, auto_move.all_time(), auto_move.read_ms());
 			move_time = Time::GetMillisec();
 			if (auto_move.next_status())//今のケースの経路をしておわったら次のフラグへ
 				route_case++;

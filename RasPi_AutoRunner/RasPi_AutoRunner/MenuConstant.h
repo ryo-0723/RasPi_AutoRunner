@@ -16,7 +16,7 @@ constexpr RectF mechanism_state_frame{ 50,150,950,650 };
 constexpr RectF portFrame{1100,250,650,550};
 constexpr RoundRect ChengeRoute{600,20,280,100,10};
 
-#pragma pack(push,1)
+//#pragma pack(push,1)
 //visualstudioでのみのもの
 struct ReadData {
 	int32_t x_axis = 0;
@@ -29,7 +29,7 @@ struct ReadData {
 	uint8_t roller_collect : 1;
 	uint8_t auto_flag : 1;
 
-};// __attribute__((__packed__));
+}__attribute__((__packed__));
 
 struct SendData {
 	int32_t x_axis = 0, y_axis = 0;
@@ -40,6 +40,6 @@ struct SendData {
 	uint8_t roller_shoot : 1;
 	uint8_t roller_collect : 1;
 	uint8_t auto_end_flag : 1;
-}_;// _attribute__((__packed__));
-#pragma pack(pop)
+}__attribute__((__packed__));
+//#pragma pack(pop)
 //visual studioでのみのもの
